@@ -4,11 +4,7 @@ class Solution:
         right = len(s) - 1
         if len(s) == 0:
             return 0
-        while left<=right:
-            if s[left] == s[right]:
-                left+=1
-                right-=1
-            else:
-                return 2
-        return 1
+        if s == s[::-1]:
+            return 1
+        return 2
         
