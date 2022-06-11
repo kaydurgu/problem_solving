@@ -1,11 +1,10 @@
 class Solution:
     def makeConnected(self, n: int, connections: List[List[int]]) -> int:
         used = [False] * n
-        self.cable = 0  
         
         self.connected_components = 0
         
-        mp = defaultdict(list)
+        mp = defaultdict(set)
         
         def solve(x):
             used[x] = True
@@ -14,8 +13,9 @@ class Solution:
                     solve(y)
                 
         for x in connections:
-            mp[x[0]].append(x[1])
-            mp[x[1]].append(x[0])
+            mp[x[0]].add(x[1])
+            mp[x[1]].add(x[0])
+            
         for i in range(len(used)):
             if not used[i]:
                 self.connected_components+=1
