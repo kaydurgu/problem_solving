@@ -17,6 +17,8 @@ class Solution:
             need = x - cur_sum
             if need in suffix_seen:
                 mn = min(mn, suffix_seen[need] + idx)
+            if cur_sum > x:
+                break
         if mn == math.inf:
             return -1
         return mn 
