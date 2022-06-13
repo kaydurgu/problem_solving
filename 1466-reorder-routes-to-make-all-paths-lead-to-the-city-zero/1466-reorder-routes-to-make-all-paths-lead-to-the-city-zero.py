@@ -1,21 +1,23 @@
 class Solution:
     def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        
         mp = defaultdict(list)
-        road = defaultdict(dict)
-        for x, y in connections:
-            road[x][y] = 1
+        
         used = [False] * n
+        
         self.ans = 0
+        
         def solve(x):
             used[x] = True
-            for y in mp[x]:
+            for y, road in mp[x]:
                 if not used[y]:
-                    if road.get(x, False):
-                        if road.get(x).get(y, False):
-                            self.ans+=1
+                    self.ans+=road
                     solve(y)
+        
         for x, y in connections:
-            mp[x].append(y)
-            mp[y].append(x)
+            mp[x].append([y, 1])
+            mp[y].append([x, 0])
+        
         solve(0)
+        
         return (self.ans)
